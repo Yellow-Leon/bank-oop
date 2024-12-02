@@ -12,6 +12,34 @@ public class Bank {
         this.accounts = accounts;
     }
 
+    public void showAllAccounts(){
+        for (Account account: accounts){
+            System.out.println(account);
+        }
+    }
+    public Account findAccount(String iban, Account[] accounts){
+        for (Account account: accounts){
+            if (account.getIban().equals(iban)){
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public void customerAccounts(String nif, Account[] accounts){
+        for (Account account:accounts){
+            if (account.getCustomer().getNif().equals(nif)){
+                System.out.println(account);
+            }
+        }
+    }
+
+    public void inputSaldo (String iban, double saldo){
+        Account account= findAccount(iban, accounts);
+        account.setSaldo(account.getSaldo() + saldo);
+        System.out.println(account.getSaldo());
+    }
+
     public String getName() {
         return name;
     }
