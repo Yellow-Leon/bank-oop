@@ -12,32 +12,47 @@ public class Bank {
         this.accounts = accounts;
     }
 
-    public void showAllAccounts(){
-        for (Account account: accounts){
-            System.out.println(account);
+    public void showAllAccounts(Account[] accounts) {
+        for (Account account : accounts) {
+            System.out.println("IBAN: " + account.getIban() + " Saldo : " + account.getSaldo() + " Customer " + account.getCustomer());
         }
     }
-    public Account findAccount(String iban, Account[] accounts){
-        for (Account account: accounts){
-            if (account.getIban().equals(iban)){
+
+    public void ShowAccount(String iban, Account[] accounts) {
+        Account account = findAccount(iban, accounts);
+        System.out.println(account);
+        if (account == null ){
+            System.out.println("No existe la cuenta");
+        }
+    }
+
+    public Account findAccount(String iban, Account[] accounts) {
+        for (Account account : accounts) {
+            if (account.getIban().equals(iban)) {
                 return account;
             }
         }
         return null;
     }
 
-    public void customerAccounts(String nif, Account[] accounts){
-        for (Account account:accounts){
-            if (account.getCustomer().getNif().equals(nif)){
+    public void customerAccounts(String nif, Account[] accounts) {
+        for (Account account : accounts) {
+            if (account.getCustomer().getNif().equals(nif)) {
                 System.out.println(account);
             }
         }
     }
 
-    public void inputSaldo (String iban, double saldo){
-        Account account= findAccount(iban, accounts);
+    public void inputSaldo(String iban, double saldo) {
+        Account account = findAccount(iban, accounts);
         account.setSaldo(account.getSaldo() + saldo);
         System.out.println(account.getSaldo());
+    }
+
+    public void outputSaldo(String iban, double saldo) {
+        Account account = findAccount(iban, accounts);
+        account.setSaldo(account.getSaldo() - saldo);
+        System.out.println("Saldo : " + account.getSaldo());
     }
 
     public String getName() {

@@ -25,6 +25,7 @@ public class BankReader {
         Account[] accounts= new Account[size];
         for (int i = 0; i < size; i++) {
             Account account = accountReader.reader();
+            accounts[i] = account;
         }
 
         return new Bank(

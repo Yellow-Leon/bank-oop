@@ -8,13 +8,9 @@ import java.util.Scanner;
 
 public class BankApp {
     private final Scanner scanner;
-    private final AccountReader accountReader;
-    private final CustomerReader customerReader;
 
     public BankApp(Scanner scanner, AccountReader accountReader, CustomerReader customerReader) {
         this.scanner = scanner;
-        this.accountReader = accountReader;
-        this.customerReader = customerReader;
     }
 
     public void menu(Bank bank) {
@@ -26,64 +22,34 @@ public class BankApp {
             System.out.println("4.Ingresar dinero en cuenta");
             System.out.println("5.Sacar dinero de una cuenta");
             System.out.println("6.Salir");
-            select = option();
+            select = scanner.nextInt();
+            scanner.nextLine();
             if (select == 1) {
-                accountPrint(bank.getAccounts());
+                bank.showAllAccounts(bank.getAccounts());
             } else if (select == 2) {
+                System.out.println("Introduce el IBAN de la cuenta a buscar");
                 String iban = scanner.nextLine();
-                showAccount(bank.getAccounts(), iban);
+                bank.findAccount(iban, bank.getAccounts());
             } else if (select == 3) {
-
+                String nif = scanner.nextLine();
+                bank.customerAccounts(nif, bank.getAccounts());
             } else if (select == 4) {
-
+                System.out.println("Introduce el IBAN de la cuenta");
+                String iban = scanner.nextLine();
+                System.out.println("¿Cuanto dinero depositara?");
+                double saldo = scanner.nextDouble();
+                scanner.nextLine();
+                bank.inputSaldo(iban, saldo);
             } else if (select == 5) {
-
+                System.out.println("Introduce el IBAN de la cuenta");
+                String iban = scanner.nextLine();
+                System.out.println("¿Cuanto dinero retirara?");
+                double saldo = scanner.nextDouble();
+                scanner.nextLine();
+                bank.outputSaldo(iban, saldo);
+            } else if (select == 6) {
+                System.out.println("Saliendo de la aplicacion del banco...");
             }
         } while (select != 6);
-    }
-
-    public int option() {
-        int option = scanner.nextInt();
-        scanner.nextLine();
-        return option;
-    }
-
-    public static void accountPrint(Account[] accounts) {
-        for (Account account : accounts) {
-            System.out.println(account);
-        }
-    }
-
-    public static void showAccount(Account[] accounts, String iban) {
-        for (Account account : accounts) {
-            if (account.getIban().equals(iban)) {
-                System.out.println(account);
-            }
-            else{
-                System.out.println("No existe la cuenta");
-            }
-        }
-    }
-
-    public static void customerAccounts (Account[] accounts, String nif){
-        for (Account account: accounts){
-            if (account.getCustomer().getNif().equals(nif)){
-                System.out.println("Las cuentas del cliente son");
-                System.out.println(account);
-            }
-        }
-    }
-
-    public void inputSaldo (Account[] accounts, String iban, double saldo){
-        for (Account account: accounts){
-            if (account.getIban().equals(iban)){
-                account.setSaldo(account.getSaldo()+saldo);
-            }
-        }
-    }
-
-    public void outputSaldo (Account[] accounts, String iban, double saldo){
-        for (Account account: accounts){
-        }
     }
 }
