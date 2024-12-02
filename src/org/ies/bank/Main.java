@@ -20,5 +20,6 @@ public class Main {
 
         BankApp bankApp = new BankApp(scanner,accountReader, customerReader);
         bankApp.menu(bank);
+
     }
 }
