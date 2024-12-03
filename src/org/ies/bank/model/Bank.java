@@ -18,12 +18,12 @@ public class Bank {
         }
     }
 
-    public void ShowAccount(String iban, Account[] accounts) {
+    public void showAccount(String iban, Account[] accounts) {
         Account account = findAccount(iban, accounts);
-        System.out.println(account);
-        if (account == null ){
+        if (account == null) {
             System.out.println("No existe la cuenta");
         }
+        System.out.println(account);
     }
 
     public Account findAccount(String iban, Account[] accounts) {
@@ -32,27 +32,43 @@ public class Bank {
                 return account;
             }
         }
-        return null;
+        return new Account("No existe", 0, null);
     }
 
+    //Falta que muestre algo
     public void customerAccounts(String nif, Account[] accounts) {
         for (Account account : accounts) {
             if (account.getCustomer().getNif().equals(nif)) {
-                System.out.println(account);
+                System.out.println("IBAN: " + account.getIban() + " Saldo : " + account.getSaldo() + " Customer " + account.getCustomer());
+            } else if (!nif.equals(account.getCustomer().getNif())) {
+                System.out.println("El cliente no tiene cuentas");
             }
         }
     }
 
     public void inputSaldo(String iban, double saldo) {
         Account account = findAccount(iban, accounts);
-        account.setSaldo(account.getSaldo() + saldo);
-        System.out.println(account.getSaldo());
+        if (account.getIban().equals("No existe")) {
+            System.out.println("No existe esa cuenta");
+        } else {
+            account.setSaldo(account.getSaldo() + saldo);
+            System.out.println(account.getSaldo());
+        }
     }
 
     public void outputSaldo(String iban, double saldo) {
         Account account = findAccount(iban, accounts);
-        account.setSaldo(account.getSaldo() - saldo);
-        System.out.println("Saldo : " + account.getSaldo());
+        if (account.getIban().equals("No existe")) {
+            System.out.println("No existe esa cuenta");
+
+        } else {
+            if (account.getSaldo() < saldo) {
+                System.out.println("El saldo disponible es menor a la cantidad solicitada");
+            } else {
+                account.setSaldo(account.getSaldo() - saldo);
+                System.out.println("Saldo : " + account.getSaldo());
+            }
+        }
     }
 
     public String getName() {

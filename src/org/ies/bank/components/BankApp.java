@@ -29,7 +29,7 @@ public class BankApp {
             } else if (select == 2) {
                 System.out.println("Introduce el IBAN de la cuenta a buscar");
                 String iban = scanner.nextLine();
-                bank.findAccount(iban, bank.getAccounts());
+                bank.showAccount(iban, bank.getAccounts());
             } else if (select == 3) {
                 String nif = scanner.nextLine();
                 bank.customerAccounts(nif, bank.getAccounts());
