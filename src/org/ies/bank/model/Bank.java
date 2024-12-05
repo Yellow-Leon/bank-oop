@@ -35,41 +35,47 @@ public class Bank {
         return new Account("No existe", 0, null);
     }
 
-    //Falta que muestre algo
+
     public void customerAccounts(String nif, Account[] accounts) {
         for (Account account : accounts) {
             if (account.getCustomer().getNif().equals(nif)) {
-                System.out.println("IBAN: " + account.getIban() + " Saldo : " + account.getSaldo() + " Customer " + account.getCustomer());
-            } else if (!nif.equals(account.getCustomer().getNif())) {
-                System.out.println("El cliente no tiene cuentas");
+                account.showInfo();
             }
         }
     }
 
-    public void inputSaldo(String iban, double saldo) {
-        Account account = findAccount(iban, accounts);
-        if (account.getIban().equals("No existe")) {
-            System.out.println("No existe esa cuenta");
-        } else {
-            account.setSaldo(account.getSaldo() + saldo);
-            System.out.println(account.getSaldo());
-        }
-    }
-
-    public void outputSaldo(String iban, double saldo) {
+    public void changeBalance(String iban, double saldo) {
         Account account = findAccount(iban, accounts);
         if (account.getIban().equals("No existe")) {
             System.out.println("No existe esa cuenta");
 
         } else {
-            if (account.getSaldo() < saldo) {
-                System.out.println("El saldo disponible es menor a la cantidad solicitada");
-            } else {
-                account.setSaldo(account.getSaldo() - saldo);
-                System.out.println("Saldo : " + account.getSaldo());
-            }
+            account.deposit(iban, saldo);
+            System.out.println("Saldo : " + account.getSaldo());
         }
     }
+
+    public int hasAccounts(String nif, Account[] accounts) {
+        int cont = 0;
+        for (Account account : accounts) {
+            if (account.getCustomer().getNif().equals(nif)) {
+                cont += 1;
+            }
+        }
+        return cont;
+    }
+
+    public Customer data(String iban, Account[] accounts) {
+        Customer data;
+        for (var account : accounts) {
+            if (account.getIban().equals(iban)) {
+                data = account.getCustomer();
+                return data;
+            }
+        }
+        return null;
+    }
+
 
     public String getName() {
         return name;

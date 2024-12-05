@@ -19,7 +19,6 @@ public class Main {
         Bank bank = bankReader.bankReader();
 
         BankApp bankApp = new BankApp(scanner,accountReader, customerReader);
-        bankApp.menu(bank);
-
+        bankApp.run(bank);
     }
 }

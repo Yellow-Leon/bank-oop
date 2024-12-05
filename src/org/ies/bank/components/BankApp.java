@@ -13,7 +13,7 @@ public class BankApp {
         this.scanner = scanner;
     }
 
-    public void menu(Bank bank) {
+    public void run(Bank bank) {
         int select;
         do {
             System.out.println("1.Mostrar las cuentas del banco");
@@ -31,6 +31,7 @@ public class BankApp {
                 String iban = scanner.nextLine();
                 bank.showAccount(iban, bank.getAccounts());
             } else if (select == 3) {
+                System.out.println("Introduce el nif");
                 String nif = scanner.nextLine();
                 bank.customerAccounts(nif, bank.getAccounts());
             } else if (select == 4) {
@@ -39,14 +40,14 @@ public class BankApp {
                 System.out.println("¿Cuanto dinero depositara?");
                 double saldo = scanner.nextDouble();
                 scanner.nextLine();
-                bank.inputSaldo(iban, saldo);
+                bank.changeBalance(iban, saldo);
             } else if (select == 5) {
                 System.out.println("Introduce el IBAN de la cuenta");
                 String iban = scanner.nextLine();
                 System.out.println("¿Cuanto dinero retirara?");
                 double saldo = scanner.nextDouble();
                 scanner.nextLine();
-                bank.outputSaldo(iban, saldo);
+                bank.changeBalance(iban, saldo);
             } else if (select == 6) {
                 System.out.println("Saliendo de la aplicacion del banco...");
             }
