@@ -2,6 +2,7 @@ package org.ies.bank.model;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Bank {
     private String name;
@@ -10,6 +11,13 @@ public class Bank {
     public Bank(String name, Account[] accounts) {
         this.name = name;
         this.accounts = accounts;
+    }
+
+    public String askIban() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduce un IBAN");
+        String iban = scanner.nextLine();
+        return iban;
     }
 
     public void showAllAccounts(Account[] accounts) {
@@ -74,6 +82,34 @@ public class Bank {
             }
         }
         return null;
+    }
+
+    public void transferency(Account[] accounts) {
+        System.out.println("Cuenta de origen");
+        Account originAccount = findAccount(askIban(), accounts);
+        System.out.println("Cuenta destino");
+        Account finalAccount = findAccount(askIban(), accounts);
+        if (originAccount == null) {
+            System.out.println("La cuenta de origen no existe");
+        } else if (finalAccount == null) {
+            System.out.println("La cuenta final no existe");
+        }
+
+        double amount = amount();
+        if (amount > originAccount.getSaldo()) {
+            System.out.println("Saldo insuficiente para la transaccion");
+        } else {
+            changeBalance(originAccount.getIban(), -amount);
+            changeBalance(finalAccount.getIban(), amount);
+        }
+    }
+
+    public double amount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduce un monton");
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+        return amount;
     }
 
 

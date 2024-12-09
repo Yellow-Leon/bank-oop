@@ -6,10 +6,10 @@ import org.ies.bank.model.Customer;
 
 import java.util.Scanner;
 
-public class BankApp {
+public class BankApp2 {
     private final Scanner scanner;
 
-    public BankApp(Scanner scanner, AccountReader accountReader, CustomerReader customerReader) {
+    public BankApp2(Scanner scanner, AccountReader accountReader, CustomerReader customerReader) {
         this.scanner = scanner;
     }
 
