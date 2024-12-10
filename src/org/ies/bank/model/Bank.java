@@ -27,14 +27,14 @@ public class Bank {
     }
 
     public void showAccount(String iban, Account[] accounts) {
-        Account account = findAccount(iban, accounts);
+        Account account = findAccount(iban);
         if (account == null) {
             System.out.println("No existe la cuenta");
         }
         System.out.println(account);
     }
 
-    public Account findAccount(String iban, Account[] accounts) {
+    public Account findAccount(String iban) {
         for (Account account : accounts) {
             if (account.getIban().equals(iban)) {
                 return account;
@@ -53,7 +53,7 @@ public class Bank {
     }
 
     public void changeBalance(String iban, double saldo) {
-        Account account = findAccount(iban, accounts);
+        Account account = findAccount(iban);
         if (account.getIban().equals("No existe")) {
             System.out.println("No existe esa cuenta");
 
@@ -86,9 +86,9 @@ public class Bank {
 
     public void transferency(Account[] accounts) {
         System.out.println("Cuenta de origen");
-        Account originAccount = findAccount(askIban(), accounts);
+        Account originAccount = findAccount(askIban());
         System.out.println("Cuenta destino");
-        Account finalAccount = findAccount(askIban(), accounts);
+        Account finalAccount = findAccount(askIban());
         if (originAccount == null) {
             System.out.println("La cuenta de origen no existe");
         } else if (finalAccount == null) {

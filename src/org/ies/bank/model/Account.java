@@ -13,17 +13,13 @@ public class Account {
         this.customer = customer;
     }
 
-    public void showInfo(){
+    public void showInfo() {
         System.out.println("IBAN : " + iban + " Saldo : " + saldo + " Customer : " + customer);
     }
 
-    public void deposit(String iban, double amount){
-        if (saldo - amount < 0){
-            System.out.println("El saldo de la cuenta es insufieciente para la transaccion");
-        }
-        else {
-            saldo += amount;
-        }
+    public void deposit(String iban, double amount) {
+        saldo += amount;
+
     }
 
     public String getIban() {

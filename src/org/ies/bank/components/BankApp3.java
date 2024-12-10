@@ -3,9 +3,7 @@ package org.ies.bank.components;
 import org.ies.bank.model.Account;
 import org.ies.bank.model.Bank;
 
-import java.util.Scanner;
-
-public class BankApp2 {
+public class BankApp3 {
 
     public void run(BankReader bankReader) {
         Bank bank = bankReader.bankReader();
